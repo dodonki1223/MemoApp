@@ -39,6 +39,11 @@
       background-color: transparent; /* 透明という指定 */
       color: rgba(255, 255, 255, 0.7);
     }
+    .memo-list-item {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
   </style>
   <body>
     <div class="container">
@@ -54,7 +59,7 @@
         <!-- MemoList -->
         <div>
           <!-- MemoListItem -->
-          <div>
+          <div class="memo-list-item">
             <div>
               <h3>買い物リスト</h3>
               <time>2020年12月24日 10:00</time>
