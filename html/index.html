@@ -43,6 +43,21 @@
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+      padding-top: 16px;
+      padding-bottom: 16px;
+      padding-left: 19px;
+    }
+    .memo-list-item-title {
+      font-size: 16px;
+      line-height: 32px;
+      margin-top: 0;
+      margin-bottom: 0;
+      font-weight: normal;
+    }
+    .memo-list-item-date {
+      font-size: 12px;
+      line-height: 16px;
+      color: #848484;
     }
   </style>
   <body>
@@ -61,8 +76,8 @@
           <!-- MemoListItem -->
           <div class="memo-list-item">
             <div>
-              <h3>買い物リスト</h3>
-              <time>2020年12月24日 10:00</time>
+              <h3 class="memo-list-item-title">買い物リスト</h3>
+              <time class="memo-list-item-date">2020年12月24日 10:00</time>
             </div>
             <div>
               <button>X</button>
