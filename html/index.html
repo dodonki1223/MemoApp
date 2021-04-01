@@ -7,19 +7,31 @@
     html, body {
       margin: 0;  /* ブラウザにデフォルトで設定されているCSSの設定を削除 */
       padding: 0; /* ブラウザにデフォルトで設定されているCSSの設定を削除 */
+      font-family: sans-serif;
     }
     .container {
-      background-color: red;
       height: 100%;
       width: 100%;
+    }
+    .header {
+      height: 104px;
+      background-color: #467FD3;
+    }
+    .header-title {
+      font-size: 24px;
+      line-height: 32px;
+      margin-bottom: 8px;
+      color: #fff;
+      font-weight: normal;
+      text-align: center;
     }
   </style>
   <body>
     <div class="container">
       <!-- Header -->
-      <div>
+      <div class="header">
         <div>
-          <h1>Memo App</h1>
+          <h1 class="header-title">Memo App</h1>
           <button>ログアウト</button>
         </div>
       </div>
