@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function App() {
+export default function AppBar() {
   return (
     <View style={styles.appbar}>
       <View style={styles.appbarInner}>
