@@ -43,8 +43,8 @@ export default function App() {
         </View>
       </View>
 
-      <View>
-        <Text>+</Text>
+      <View style={styles.circleBotton}>
+        <Text style={styles.circleBottonLabel}>+</Text>
       </View>
     </View>
   );
@@ -95,5 +95,28 @@ const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 16,
     color: '#848484',
+  },
+  circleBotton: {
+    backgroundColor: '#467FD3',
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    right: 40,
+    bottom: 40,
+    // shadow 系のCSSは iOS にしか対応できていない
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.25,
+    textShadowRadius: 8,
+    // elevation は android にしか対応していない（Material Design を確認）
+    elevation: 8,
+  },
+  circleBottonLabel: {
+    color: '#FFF',
+    fontSize: 40,
+    lineHeight: 40,
   },
 });
