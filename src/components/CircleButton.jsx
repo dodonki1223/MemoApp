@@ -4,6 +4,7 @@ import { string, shape } from 'prop-types';
 
 import Icon from './Icon';
 
+// NOTE: props の引数部分は { style, name } で分割代入で代わりができる
 export default function CircleButton(props) {
   const { style, name } = props;
   return (
