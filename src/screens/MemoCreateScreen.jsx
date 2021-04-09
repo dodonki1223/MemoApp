@@ -4,7 +4,8 @@ import { View, TextInput, StyleSheet } from 'react-native';
 import CircleButton from '../components/CircleButton';
 import KeyboardSafeView from '../components/KeyboardSafeView';
 
-export default function MemoCreateScreen() {
+export default function MemoCreateScreen(props) {
+  const { navigation } = props;
   return (
     // <KeyboardAvoidingView style={styles.container} behavior="height" >
     // 本来なら KeyboardAvoidingView を使用すべきだが、バグがありスタンプに切り替えたり
@@ -13,7 +14,10 @@ export default function MemoCreateScreen() {
       <View style={styles.inputContainer}>
         <TextInput value="" multiline style={styles.input} />
       </View>
-      <CircleButton name="check" />
+      <CircleButton
+        name="check"
+        onPress={() => { navigation.goBack(); }}
+      />
     </KeyboardSafeView>
   );
 }

@@ -4,11 +4,15 @@ import { View, StyleSheet } from 'react-native';
 import MemoList from '../components/MemoList';
 import CircleButton from '../components/CircleButton';
 
-export default function App() {
+export default function App(props) {
+  const { navigation } = props;
   return (
     <View style={styles.container}>
       <MemoList />
-      <CircleButton name="plus" />
+      <CircleButton
+        name="plus"
+        onPress={() => { navigation.navigate('MemoCreate'); }}
+      />
     </View>
   );
 }
