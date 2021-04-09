@@ -18,15 +18,31 @@ export default function SignUpScreen(props) {
     <View style={styles.container}>
       <View style={styles.inner}>
         <Text style={styles.title}>Sign Up</Text>
+        {/*
+          autoCapitalize ：none にすることで文字入力時に一番始めの文字が大文字にならない
+          keyboardType   ：入力に適したキーボードを表示してくれる
+          placeholder    ：未入力時に表示される文字列
+          textContentType：ユーザーが入力するコンテンツの内容をシステムに提供する（キーチェーンの設定があると自動でパスワードを入力してくれるようになる）
+          secureTextEntry：入力した内容が※で表示される（パスワード入力用の表示）
+          「secureTextEntry」これは secureTextEntry={true} と同じ意味を指す
+          */}
         <TextInput
           style={styles.input}
           value={email}
           onChangeText={(text) => { setEmail(text); }}
+          autoCapitalize="none"
+          keyboardType="email-address"
+          placeholder="Email Address"
+          textContentType="emailAddress"
         />
         <TextInput
           style={styles.input}
           value={password}
           onChangeText={(text) => { setPassword(text); }}
+          autoCapitalize="none"
+          placeholder="Password"
+          secureTextEntry
+          textContentType="password"
         />
         <Button
           label="Submit"
