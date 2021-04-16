@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
+import Constants from 'expo-constants';
 import firebase from 'firebase';
 
 import MemoListScreen from './src/screens/MemoListScreen';
@@ -13,12 +14,12 @@ import SignUpScreen from './src/screens/SignUpScreen';
 const Stack = createStackNavigator();
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.FIREBASE_APP_ID,
+  apiKey: 'sample_api_key',
+  authDomain: 'sample_auth_domain',
+  projectId: 'sample_project_id',
+  storageBucket: 'sample_storage_bucket',
+  messagingSenderId: 'sample_messaging_sender_id',
+  appId: 'sample_app_id',
 };
 
 // firebase がすでに初期化されていたら初期化処理を行わないための書きぶり
