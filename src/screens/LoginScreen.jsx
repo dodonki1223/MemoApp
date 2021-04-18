@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View, Text, TextInput, StyleSheet, TouchableOpacity, Alert,
 } from 'react-native';
@@ -10,6 +10,45 @@ export default function LogInScreen(props) {
   const { navigation } = props;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  /*
+    useEffect(callback)
+      Props が変更されるなどして、画面がアップデートされる度に callback が実行される
+    useEffect(callback, [])
+      コンポーネントがマウントされた時に、一度だけ callback が実行される
+    useEffect(callback, [foo])
+      foo が更新されたら callback が実行される
+   */
+  /*
+      コンポーネントがアンマウントされる直前に cleanup（関数）が実行される
+      useEffect(() => {
+        console.log('Hello');
+        return cloeanup;
+      }, []);
+
+      useEffect(() => {
+        // 画面が表示された時に実行
+        console.log('useEffect!');
+        return () => {
+          // 画面が unload された時に実行される
+          console.log('Unmount!');
+        };
+      }, []);
+  */
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'MemoList' }],
+        });
+      }
+    });
+    // LoginScreen がアンマウントされる直前に実行され、
+    // ログインのチェック処理が後続の処理で行われないようになる
+    // これをしておかないと常にログインチェックが実行されてしまう
+    return unsubscribe;
+  }, []);
 
   function handlePress() {
     firebase.auth().signInWithEmailAndPassword(email, password)
