@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
-import Constants from 'expo-constants';
 import firebase from 'firebase';
 
 import MemoListScreen from './src/screens/MemoListScreen';
@@ -11,16 +10,9 @@ import MemoCreateScreen from './src/screens/MemoCreateScreen';
 import LogInScreen from './src/screens/LoginScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
 
-const Stack = createStackNavigator();
+import { firebaseConfig } from './env';
 
-const firebaseConfig = {
-  apiKey: 'sample_api_key',
-  authDomain: 'sample_auth_domain',
-  projectId: 'sample_project_id',
-  storageBucket: 'sample_storage_bucket',
-  messagingSenderId: 'sample_messaging_sender_id',
-  appId: 'sample_app_id',
-};
+const Stack = createStackNavigator();
 
 // firebase がすでに初期化されていたら初期化処理を行わないための書きぶり
 if (firebase.apps.length === 0) {
