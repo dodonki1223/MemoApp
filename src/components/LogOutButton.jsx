@@ -1,9 +1,29 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import {
+  TouchableOpacity, Text, StyleSheet, Alert,
+} from 'react-native';
+import firebase from 'firebase';
+import { useNavigation } from '@react-navigation/native';
 
 export default function LogOutButton() {
+  // ReactHooks は直下に置かないとだめなので signOut() の中に置くとエラーになってしまう
+  const navigation = useNavigation();
+
+  function handlePress() {
+    firebase.auth().signOut()
+      .then(() => {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'LogIn' }],
+        });
+      })
+      .catch(() => {
+        Alert.alert('ログアウトに失敗しました');
+      });
+  }
+
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity onPress={handlePress} style={styles.container}>
       <Text style={styles.label}>ログアウト</Text>
     </TouchableOpacity>
   );
