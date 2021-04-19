@@ -16,6 +16,7 @@ export default function MemoCreateScreen(props) {
     const ref = db.collection(`users/${currentUser.uid}/memos`);
     ref.add({
       bodyText,
+      updateAt: new Date(),
     })
       .then((docRef) => {
         console.log('Created!', docRef.id);
@@ -30,6 +31,8 @@ export default function MemoCreateScreen(props) {
     // <KeyboardAvoidingView style={styles.container} behavior="height" >
     // 本来なら KeyboardAvoidingView を使用すべきだが、バグがありスタンプに切り替えたり
     // すると CircleButton が隠れてしまうため、自作の component を使用する
+    //
+    // autoFocus を追加して画面を表示した時にキーボードが表示されるようにする
     <KeyboardSafeView style={styles.container}>
       <View style={styles.inputContainer}>
         <TextInput
@@ -37,6 +40,7 @@ export default function MemoCreateScreen(props) {
           multiline
           style={styles.input}
           onChangeText={(text) => { setBodyText(text); }}
+          autoFocus
         />
       </View>
       <CircleButton
