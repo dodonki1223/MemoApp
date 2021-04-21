@@ -41,14 +41,13 @@ export default function App(props) {
         console.log(error);
         Alert.alert('データの読み込みに失敗しました。');
       });
-      });
     }
     return unsubscribe;
   }, []);
 
   return (
     <View style={styles.container}>
-      <MemoList />
+      <MemoList memos={memos} />
       <CircleButton
         name="plus"
         onPress={() => { navigation.navigate('MemoCreate'); }}
