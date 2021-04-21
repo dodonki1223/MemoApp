@@ -1,35 +1,51 @@
 import React from 'react';
+// FlatList：画面外のものに関してはレンダリングしないようにするコンポーネント。つまりパフォーマンスが上がる
 import {
-  View, Text, StyleSheet, TouchableOpacity, Alert,
+  View, Text, StyleSheet, TouchableOpacity, Alert, FlatList
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { shape, string, instanceOf, arrayOf } from 'prop-types';
+import {
+  shape, string, instanceOf, arrayOf,
+} from 'prop-types';
 
 import Icon from './Icon';
 
 export default function MemoList(props) {
   const navigation = useNavigation();
   const { memos } = props;
+
+  function renderItem({ item }) {
+    return (
+      <TouchableOpacity
+        style={styles.memoListItem}
+        onPress={() => { navigation.navigate('MemoDetail'); }}
+      >
+        <View>
+          <Text style={styles.memoListItemTitle}>{item.bodyText}</Text>
+          <Text style={styles.memoListItemDate}>{String(item.updatedAt)}</Text>
+        </View>
+        <TouchableOpacity
+          style={styles.memoDelete}
+          onPress={() => { Alert.alert('Are you sure?'); }}
+        >
+          <Icon name="delete" size={24} color="#B0B0B0" />
+        </TouchableOpacity>
+      </TouchableOpacity>
+    );
+  }
+
   return (
     <View>
-      {memos.map((memo) => (
-        <TouchableOpacity
-          key={memo.id}
-          style={styles.memoListItem}
-          onPress={() => { navigation.navigate('MemoDetail'); }}
-        >
-          <View>
-            <Text style={styles.memoListItemTitle}>{memo.bodyText}</Text>
-            <Text style={styles.memoListItemDate}>{String(memo.updatedAt)}</Text>
-          </View>
-          <TouchableOpacity
-            style={styles.memoDelete}
-            onPress={() => { Alert.alert('Are you sure?'); }}
-          >
-            <Icon name="delete" size={24} color="#B0B0B0" />
-          </TouchableOpacity>
-        </TouchableOpacity>
-      ))}
+      {/*
+          renderItem の中で key={item.id} の指定をしなくてもよい理由としては
+          keyExtractor={(item) => item.id} を設定することで解決しています
+          key の値は item.id を使用していますという意味です
+        */}
+      <FlatList
+        data={memos}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+      />
     </View>
   );
 }
