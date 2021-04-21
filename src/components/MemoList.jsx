@@ -21,7 +21,8 @@ export default function MemoList(props) {
         onPress={() => { navigation.navigate('MemoDetail'); }}
       >
         <View>
-          <Text style={styles.memoListItemTitle}>{item.bodyText}</Text>
+          {/* numberOfLines を設定すると１行で表示されるようになる */}
+          <Text style={styles.memoListItemTitle} numberOfLines={1}>{item.bodyText}</Text>
           <Text style={styles.memoListItemDate}>{String(item.updatedAt)}</Text>
         </View>
         <TouchableOpacity
@@ -61,6 +62,9 @@ MemoList.propTypes = {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   memoListItem: {
     backgroundColor: '#fff',
     flexDirection: 'row',
