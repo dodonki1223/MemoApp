@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { shape, string } from 'prop-types';
 import {
   View, Text, ScrollView, StyleSheet,
 } from 'react-native';
+import firebase from 'firebase';
 
 import CircleButton from '../components/CircleButton';
 
@@ -10,6 +11,33 @@ export default function MemoDetailScreen(props) {
   const { navigation, route } = props;
   const { id } = route.params;
   console.log(id);
+  const [memo, setMemo] = useState(null);
+
+  useEffect(() => {
+    const { currentUser } = firebase.auth();
+    let unsubscribe = () => {};
+    if (currentUser) {
+      /*
+          db.collection('foo').onSnapshot((snapshot) => {})
+            QuerySnapshot を返す、複数の DocumentSnapshot を含む
+          db.collection('foo').doc('bar').onSnapshot((doc) => {})
+            DocumentSnapshot を返す、単一のドキュメントのデータを持っている
+        */
+      const db = firebase.firestore();
+      const ref = db.collection(`users/${currentUser.uid}/memos`).doc(id);
+      unsubscribe = ref.onSnapshot((doc) => {
+        console.log(doc.id, doc.data());
+        const data = doc.data();
+        setMemo({
+          id: doc.id,
+          bodyText: data.bodyText,
+          updatedAt: data.updatedAt.toDate(),
+        });
+      });
+    }
+    return unsubscribe;
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.memoHeader}>
