@@ -1,4 +1,5 @@
 import React from 'react';
+import { shape, string } from 'prop-types';
 import {
   View, Text, ScrollView, StyleSheet,
 } from 'react-native';
@@ -6,7 +7,9 @@ import {
 import CircleButton from '../components/CircleButton';
 
 export default function MemoDetailScreen(props) {
-  const { navigation } = props;
+  const { navigation, route } = props;
+  const { id } = route.params;
+  console.log(id);
   return (
     <View style={styles.container}>
       <View style={styles.memoHeader}>
@@ -27,6 +30,12 @@ export default function MemoDetailScreen(props) {
       />
     </View>
   );
+}
+
+MemoDetailScreen.protoTypes = {
+  route: shape({
+    params: shape({ id: string }),
+  }).isRequired,
 }
 
 const styles = StyleSheet.create({

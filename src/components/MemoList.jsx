@@ -18,7 +18,7 @@ export default function MemoList(props) {
     return (
       <TouchableOpacity
         style={styles.memoListItem}
-        onPress={() => { navigation.navigate('MemoDetail'); }}
+        onPress={() => { navigation.navigate('MemoDetail', { id: item.id }); }}
       >
         <View>
           {/* numberOfLines を設定すると１行で表示されるようになる */}
