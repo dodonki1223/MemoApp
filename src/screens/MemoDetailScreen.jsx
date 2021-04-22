@@ -38,17 +38,23 @@ export default function MemoDetailScreen(props) {
     return unsubscribe;
   }, []);
 
+  /*
+      { memo && memo.bodyText }
+      { memo && String(memo.updatedAt) }
+      { memo && memo.bodyText }
+      memo && hoge という書き方に関して
+        memo の初期値は null のため、データの存在チェックを書いて
+        データが存在する時は表示するようにしている
+   */
   return (
     <View style={styles.container}>
       <View style={styles.memoHeader}>
-        <Text style={styles.memoTitle}>買い物リスト</Text>
-        <Text style={styles.memoDate}>2020年12月24日 10:00</Text>
+        <Text style={styles.memoTitle} numberOfLines={1}>{ memo && memo.bodyText }</Text>
+        <Text style={styles.memoDate}>{ memo && String(memo.updatedAt) }</Text>
       </View>
       <ScrollView style={styles.memoBody}>
         <Text style={styles.memoText}>
-          買い物リスト
-          書体やレイアウトなどを確認するために用います。
-          本文用なので使い方を間違えると不自然に見えることもありますので要注意。
+          { memo && memo.bodyText }
         </Text>
       </ScrollView>
       <CircleButton
