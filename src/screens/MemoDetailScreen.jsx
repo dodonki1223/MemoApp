@@ -6,6 +6,12 @@ import {
 import firebase from 'firebase';
 
 import CircleButton from '../components/CircleButton';
+/*
+    import { dateToString } from '../utils/index.js';
+    と書かなくても問題ない。index.js は特殊な指定でディレクトリを指定して
+    あげるだけで読み込まれる
+ */
+import { dateToString } from '../utils';
 
 export default function MemoDetailScreen(props) {
   const { navigation, route } = props;
@@ -50,7 +56,7 @@ export default function MemoDetailScreen(props) {
     <View style={styles.container}>
       <View style={styles.memoHeader}>
         <Text style={styles.memoTitle} numberOfLines={1}>{ memo && memo.bodyText }</Text>
-        <Text style={styles.memoDate}>{ memo && String(memo.updatedAt) }</Text>
+        <Text style={styles.memoDate}>{ memo && dateToString(memo.updatedAt) }</Text>
       </View>
       <ScrollView style={styles.memoBody}>
         <Text style={styles.memoText}>
