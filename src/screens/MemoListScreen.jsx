@@ -95,4 +95,8 @@ const emptyStyles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 24,
   },
+  button: {
+    // ボタンが真ん中に表示されるようになる
+    alignSelf: 'center',
+  },
 });
