@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
+import { shape, string } from 'prop-types';
 
 import CircleButton from '../components/CircleButton';
 import KeyboardSafeView from '../components/KeyboardSafeView';
 
 export default function MemoEditScreen(props) {
-  const { navigation } = props;
+  const { navigation, route } = props;
+  const { id, bodyText } = route.params;
+  const [body, setBody] = useState(bodyText);
   return (
     <KeyboardSafeView style={styles.container}>
       <View style={styles.inputContainer}>
-        <TextInput value="買い物リスト" multiline style={styles.input} />
+        <TextInput
+          value="買い物リスト"
+          multiline
+          style={styles.input}
+        />
       </View>
       <CircleButton
         name="check"
@@ -18,6 +25,12 @@ export default function MemoEditScreen(props) {
     </KeyboardSafeView>
   );
 }
+
+MemoEditScreen.propTypes = {
+  route: shape({
+    params: shape({ id: string, bodyText: string }),
+  }).isRequired,
+};
 
 const styles = StyleSheet.create({
   container: {
