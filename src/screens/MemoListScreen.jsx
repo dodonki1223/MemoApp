@@ -56,7 +56,7 @@ export default function App(props) {
           <Button
             style={emptyStyles.button}
             label="作成する"
-            onPress={() => {}}
+            onPress={() => { navigation.navigate('MemoCreate'); }}
           />
         </View>
       </View>
