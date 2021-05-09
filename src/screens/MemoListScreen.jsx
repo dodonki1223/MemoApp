@@ -13,6 +13,7 @@ import Loading from '../components/Loading';
 export default function App(props) {
   const { navigation } = props;
   const [memos, setMemos] = useState([]);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     navigation.setOptions({
@@ -27,6 +28,7 @@ export default function App(props) {
     // ユーザー情報が取得できない場合もあるため、if 文をかます
     // 例えば session の expire がなくなった時などが該当する
     if (currentUser) {
+      setLoading(true);
       const ref = db.collection(`users/${currentUser.uid}/memos`).orderBy('updatedAt', 'desc');
       // onSnapshot のメソッドでデータの取得に失敗することがあるのでその処理も記述する
       // ネットワークの問題などにより失敗する可能性がある
@@ -41,8 +43,10 @@ export default function App(props) {
           });
         });
         setMemos(userMemos);
+        setLoading(false);
       }, (error) => {
         console.log(error);
+        setLoading(false);
         Alert.alert('データの読み込みに失敗しました。');
       });
     }
@@ -52,6 +56,7 @@ export default function App(props) {
   if (memos.length === 0) {
     return (
       <View style={emptyStyles.container}>
+        <Loading isLoading={isLoading} />
         <View style={emptyStyles.inner}>
           <Text style={emptyStyles.title}>最初のメモを作成しよう！</Text>
           <Button
@@ -66,7 +71,6 @@ export default function App(props) {
 
   return (
     <View style={styles.container}>
-      <Loading />
       <MemoList memos={memos} />
       <CircleButton
         name="plus"
