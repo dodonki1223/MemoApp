@@ -1,7 +1,7 @@
 import React from 'react';
 // FlatList：画面外のものに関してはレンダリングしないようにするコンポーネント。つまりパフォーマンスが上がる
 import {
-  View, Text, StyleSheet, TouchableOpacity, Alert, FlatList
+  View, Text, StyleSheet, TouchableOpacity, Alert, FlatList,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {

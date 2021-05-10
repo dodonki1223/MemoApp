@@ -7,6 +7,7 @@ import firebase from 'firebase';
 
 import CircleButton from '../components/CircleButton';
 import KeyboardSafeView from '../components/KeyboardSafeView';
+import { translateErrors } from '../utils';
 
 export default function MemoEditScreen(props) {
   const { navigation, route } = props;
@@ -36,7 +37,11 @@ export default function MemoEditScreen(props) {
           navigation.goBack();
         })
         .catch((error) => {
-          Alert.alert(error.code);
+          // firestore のエラーコードに関してはこちらのページを参考にすること
+          // https://firebase.google.com/docs/reference/node/firebase.firestore#firestoreerrorcode
+          // 今回は殆どエラーが発生しないため、スキップする
+          const errorMsg = translateErrors(error.code);
+          Alert.alert(errorMsg.title, errorMsg.description);
         });
     }
   }
