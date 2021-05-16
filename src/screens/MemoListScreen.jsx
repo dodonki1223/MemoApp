@@ -44,8 +44,7 @@ export default function App(props) {
         });
         setMemos(userMemos);
         setLoading(false);
-      }, (error) => {
-        console.log(error);
+      }, () => {
         setLoading(false);
         Alert.alert('データの読み込みに失敗しました。');
       });
