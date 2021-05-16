@@ -75,13 +75,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   inputContainer: {
-    paddingHorizontal: 27,
-    paddingVertical: 32,
     flex: 1,
   },
   input: {
     flex: 1,
     textAlignVertical: 'top',
     lineHeight: 24,
+    // paddingTop と Bottom をなぜ Verticalにしないのか？
+    // なぜかスタイルが効かないためそれぞれに設定する
+    paddingTop: 32,
+    paddingBottom: 32,
+    paddingHorizontal: 27,
   },
 });
